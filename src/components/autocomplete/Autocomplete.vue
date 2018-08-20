@@ -238,8 +238,15 @@
              * Select the hovered option.
              */
             enterPressed() {
-                if (this.hovered === null) return
-                this.setSelected(this.hovered)
+                const currentValue = this.getValue(this.selected)
+                const newValue = this.getValue(this.hovered)
+                if (currentValue === newValue || (currentValue && !this.hovered)) {
+                    this.$emit('submit')
+                } else if (this.hovered === null) {
+                    return
+                } else {
+                    this.setSelected(this.hovered)
+                }                
             },
 
             /**
